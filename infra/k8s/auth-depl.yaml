@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  #name of the deployement
+  name: auth-depl
+spec:
+  # number of pods we want to create
+  replicas: 1
+  selector:
+    matchLabels:
+      # label can be anything instead of app
+      app: auth
+
+  #very similar to pod config file
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth
+          image: chipmunkey/auth
+---
+# services
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-srv
+spec:
+  selector:
+    # matchlabels from the deployment
+    app: auth
+  ports:
+    - name: auth
+      protocol: TCP
+         # app listening on
+      port: 3000
+      targetPort: 3000      

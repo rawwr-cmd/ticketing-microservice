@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  namespace: default
+  annotations:
+    # this will help find the routing rules
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  # rules are going to have all the routing rules that we want
+  # to apply to teach the ingress controller how to take up the
+  # incoming traffic and route them up toward different pods
+  rules:
+    - host: ticketing.dev
+      http:
+        paths:
+          - path: /api/users/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: auth-srv
+                port:
+                  number: 3000
