@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: chipmunkey/auth
+          image: gcr.io/ticketing-microservice-371310/auth
 ---
 # services
 apiVersion: v1
