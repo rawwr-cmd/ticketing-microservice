@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: gcr.io/ticketing-microservice-371310/auth
+          image: us.gcr.io/ticketing-dev-371321/auth
 ---
 # services
 apiVersion: v1

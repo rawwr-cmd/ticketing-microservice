@@ -8,9 +8,9 @@ build:
   # local:
   #   push: false
   googleCloudBuild:
-      projectId: ticketing-microservice-371310
+      projectId: ticketing-dev-371321
   artifacts:
-    - image: gcr.io/ticketing-microservice-371310/auth
+    - image: us.gcr.io/ticketing-dev-371321/auth
       context: auth
       docker:
         dockerfile: Dockerfile
