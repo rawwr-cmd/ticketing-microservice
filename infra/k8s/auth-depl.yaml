@@ -31,6 +31,7 @@ spec:
     # matchlabels from the deployment
     app: auth
   ports:
+   # name can be anything
     - name: auth
       protocol: TCP
          # app listening on
