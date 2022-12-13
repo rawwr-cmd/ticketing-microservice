@@ -20,7 +20,7 @@ router.post(
       .isAlphanumeric()
       .trim(),
   ],
-  (req: Request, res: Response) => {
+  async (req: Request, res: Response) => {
     const errors = validationResult(req);
     // console.log(errors);
     // Result {
@@ -38,6 +38,7 @@ router.post(
     if (!errors.isEmpty()) {
       throw new RequestValidationError(errors.array());
     }
+
     console.log("Creating a user...");
 
     throw new DatabaseConnectionerror();
