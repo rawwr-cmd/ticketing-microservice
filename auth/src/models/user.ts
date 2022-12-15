@@ -34,12 +34,12 @@ const userSchema = new Schema({
   },
 });
 
-const User = mongoose.model<UserDoc, UserModel>("User", userSchema);
 //adding a function to the model in the mongoose
 userSchema.statics.build = (attrs: UserAttrs) => {
   return new User(attrs);
 };
 
+const User = mongoose.model<UserDoc, UserModel>("User", userSchema);
 // const buildUser = (attrs: UserAttrs) => {
 //   return new User(attrs);
 // };
@@ -49,10 +49,10 @@ userSchema.statics.build = (attrs: UserAttrs) => {
 //   password: "password",
 // });
 
-const user = User.build({
-  email: "akshayace@gmail.com",
-  password: "password",
-});
+// User.build({
+//   email: "akshayace@gmail.com",
+//   password: "password",
+// });
 // user.email;
 // user.password;
 
