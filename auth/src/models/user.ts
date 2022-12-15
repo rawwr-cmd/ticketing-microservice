@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { Password } from "../services/password";
 // import { Schema, model, connect } from 'mongoose';
 const Schema = mongoose.Schema;
 
@@ -34,12 +35,22 @@ const userSchema = new Schema({
   },
 });
 
+userSchema.pre("save", async function (done) {
+  if (this.isModified("password")) {
+    const hashed = await Password.toHash(this.get("password"));
+    this.set("password", hashed);
+  }
+  done();
+});
 //adding a function to the model in the mongoose
 userSchema.statics.build = (attrs: UserAttrs) => {
   return new User(attrs);
 };
 
 const User = mongoose.model<UserDoc, UserModel>("User", userSchema);
+
+export { User };
+
 // const buildUser = (attrs: UserAttrs) => {
 //   return new User(attrs);
 // };
@@ -55,5 +66,3 @@ const User = mongoose.model<UserDoc, UserModel>("User", userSchema);
 // });
 // user.email;
 // user.password;
-
-export { User };
