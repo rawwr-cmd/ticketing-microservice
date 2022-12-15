@@ -9,13 +9,13 @@ export const errorHandler = (
 ) => {
   // console.log("Something went wrong", error);
   if (error instanceof CustomError) {
-    // console.log(error);
+    console.log(error);
     return res
       .status(error.statusCode)
       .send({ errors: error.serializeErrors() });
   }
 
-  res.status(400).send({
-    errors: [{ message: "Something went wrong" }],
-  });
+  // res.status(400).send({
+  //   errors: [{ message: "Something went wrong" }],
+  // });
 };
