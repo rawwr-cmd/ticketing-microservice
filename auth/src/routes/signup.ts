@@ -1,29 +1,23 @@
 import express, { Request, Response } from "express";
-import { body, validationResult } from "express-validator";
+import { body } from "express-validator";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user";
 import { BadRequestError } from "../errors/bad-request-error";
-import { RequestValidationError } from "../errors/request-validation-errors";
+import { validateRequest } from "../middlewares/validate-request";
 
 const router = express.Router();
 
 router.post(
   "/api/users/signup",
   [
-    body("email")
-      .isEmail()
-      .withMessage("Please enter a valid email address.")
-      .normalizeEmail(),
-    body(
-      "password",
-      "Please enter a password with only numbers and text and at least 5 characters."
-    )
+    body("email").isEmail().withMessage("Please enter a valid email address."),
+    body("password")
+      .trim()
       .isLength({ min: 5, max: 20 })
-      .isAlphanumeric()
-      .trim(),
+      .withMessage("Password must be between 5 and 20 characters."),
   ],
+  validateRequest,
   async (req: Request, res: Response) => {
-    const errors = validationResult(req);
     // console.log(errors);
     // Result {
     //    formatter: [Function: formatter],
@@ -36,10 +30,6 @@ router.post(
     //      }
     //    ]
     //  }
-
-    if (!errors.isEmpty()) {
-      throw new RequestValidationError(errors.array());
-    }
 
     const { email, password } = req.body;
     const existingUser = await User.findOne({ email });
