@@ -1,6 +1,6 @@
 import request from "supertest";
 import { app } from "../../app";
-import { global } from "../../helpers/auth-helper-func";
+import { global } from "../../helpers/auth-helper-test";
 
 it("responds with details about the current user", async () => {
   const cookie = await global.signup();
