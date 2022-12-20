@@ -4,7 +4,7 @@ FROM node:19-alpine
 # set working directory
 WORKDIR /app
 COPY package.json .
-RUN npm install
+RUN npm install --only=prod
 COPY . .
 
 # start app
