@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  #name of the deployement
+  name: client-depl
+spec:
+  # number of pods we want to create
+  replicas: 1
+  selector:
+    matchLabels:
+      # label can be anything 
+      app: client
+
+  #very similar to pod config file
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+        - name: client
+          image: gcr.io/ticketing-dev-371321/client
+---
+# services
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-srv
+spec:
+  selector:
+    # matchlabels from the deployment
+    app: client
+  ports:
+   # name can be anything
+    - name: client
+      protocol: TCP
+         # app listening on
+      port: 3000
+      targetPort: 3000     
+
+
+
