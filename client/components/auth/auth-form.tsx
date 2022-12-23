@@ -1,28 +1,25 @@
 import classes from "./auth-form.module.css";
-import axios from "axios";
 import { useState } from "react";
+import useRequest from "../../hooks/use-request";
 
 const AuthForm = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [errors, setErrors] = useState<string[]>([]);
+  const { doRequest, errors } = useRequest({
+    url: "/api/users/signup",
+    method: "post",
+    body: {
+      email,
+      password,
+    },
+  });
 
-  const submitHandler = async (event: React.FormEvent) => {
+  const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // Add validation
 
-    try {
-      const response = await axios.post("/api/users/signup", {
-        email,
-        password,
-      });
-      console.log(response.data);
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        setErrors(error.response?.data.errors);
-      }
-    }
+    doRequest();
 
     console.log(email, password);
   };
@@ -54,15 +51,7 @@ const AuthForm = () => {
             autoComplete="On"
           />
         </div>
-        {errors.length > 0 && (
-          <div className={classes.errors}>
-            <ul>
-              {errors.map((error: any) => (
-                <li key={error.message}>{error.message}</li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {errors}
         <div className={classes.actions}>
           <button>Submit</button>
         </div>
