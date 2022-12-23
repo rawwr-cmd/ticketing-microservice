@@ -1,0 +1,18 @@
+.errors {
+    color: rgb(198, 151, 151);
+    margin: 0.5rem 0;
+}
+
+.errors ul {
+    margin: 2rem 0;
+    padding: 0;
+}
+
+.errors li {
+    list-style: none;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
