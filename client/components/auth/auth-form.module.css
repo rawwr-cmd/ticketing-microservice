@@ -44,40 +44,31 @@
 }
 
 .actions button {
+  cursor: pointer;
   background: white;
   font: inherit;
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: #005272;
   border: 2px solid #005272;
   border-radius: 4px;
   padding: 0.2rem 1.5rem;
-  transition: color 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.25s;
 }
 
 .actions button:hover {
   border-color: #80b6cb;
   color: #005272;
-  /* offset-x | offset-y | blur-radius | spread-radius | color */
-  box-shadow: 0 0.3rem 0.5rem -0.4rem #80b6cb;
-  transform: translateY(-0.2rem);
-  cursor: pointer;
 }
 
-.errors {
-  color: rgb(198, 151, 151);
-  margin: 0.5rem 0;
+
+.actions .toggle {
+  margin-top: 1rem;
+  background-color: white;
+  color: #005272;
+  border: 2px solid #005272;
+  padding: 0.15rem 1.5rem;
 }
 
-.errors ul {
-  margin: 2rem 0;
-  padding: 0;
-}
-
-.errors li {
-  list-style: none;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  display: block;
-  margin: 0;
-  padding: 0;
+.actions .toggle:hover {
+  background-color: white;
+  color: #005272;
 }

@@ -1,5 +1,5 @@
 const banana = () => {
-  return <div>banana is cool3</div>;
+  return <div>banana is cool7</div>;
 };
 
 export default banana;
