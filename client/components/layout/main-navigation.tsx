@@ -18,7 +18,7 @@ function MainNavigation({ currentUser }: NavigationProps) {
         <ul>
           {currentUser ? (
             <li>
-              <Link href="/auth">SignOut</Link>
+              <Link href="/auth/signout">SignOut</Link>
             </li>
           ) : (
             <li>
