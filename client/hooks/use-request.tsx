@@ -6,10 +6,10 @@ interface UseRequestProps {
   url: string;
   method: "post" | "get" | "put" | "delete";
   body?: any;
-  onSuccess?: () => void;
+  onSuccess?: (data: any) => void;
 }
 
-const useRequest = ({ url, method, body }: UseRequestProps) => {
+const useRequest = ({ url, method, body, onSuccess }: UseRequestProps) => {
   //method === 'POST' || 'GET' || 'PUT' || 'DELETE'
   const [errors, setErrors] = useState<null | ReactElement>(null);
 
@@ -17,6 +17,11 @@ const useRequest = ({ url, method, body }: UseRequestProps) => {
     try {
       setErrors(null);
       const response = await axios[method](url, body);
+
+      if (onSuccess) {
+        onSuccess(response.data);
+      }
+
       return response.data;
     } catch (err) {
       if (axios.isAxiosError(err)) {
