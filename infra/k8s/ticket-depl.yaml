@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  #name of the deployement
+  name: tickets-depl
+spec:
+  # number of pods we want to create
+  replicas: 1
+  selector:
+    matchLabels:
+      # label can be anything instead of app
+      app: tickets
+
+  #very similar to pod config file
+  template:
+    metadata:
+      labels:
+        app: tickets
+    spec:
+      containers:
+        - name: tickets
+          image: gcr.io/ticketing-dev-371321/tickets
+          env:
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+---
+# services
+apiVersion: v1
+kind: Service
+metadata:
+  name: tickets-srv
+spec:
+  selector:
+    # matchlabels from the deployment
+    app: tickets
+  ports:
+   # name can be anything
+    - name: tickets
+      protocol: TCP
+         # app listening on
+      port: 3000
+      targetPort: 3000   

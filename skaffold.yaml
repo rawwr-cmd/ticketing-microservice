@@ -28,4 +28,13 @@ build:
           - src: '**/*.tsx' 
             dest: .
 
-        
+    - image: gcr.io/ticketing-dev-371321/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: '**/*.ts' 
+            dest: .
+
+

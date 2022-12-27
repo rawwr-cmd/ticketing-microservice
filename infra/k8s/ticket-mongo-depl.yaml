@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  #name of the deployement
+  name: tickets-mongo-depl
+spec:
+  # number of pods we want to create
+  replicas: 1
+  selector:
+    matchLabels:
+      # label can be anything instead of app
+      app: tickets-mongo
+ 
+  #very similar to pod config file
+  template:
+    metadata:
+      labels:
+        app: tickets-mongo
+    spec:
+      containers:
+        - name: tickets-mongo
+          image: mongo
+---
+apiVersion: v1
+kind: Service
+metadata:          
+  name: tickets-mongo-srv
+spec:
+# find a pod with a label of auth-mongo(mongo-labels)
+  selector:
+    app: tickets-mongo
+  ports:
+    - name: db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017
+      
+ 
