@@ -5,6 +5,11 @@ let globalWithSignIn = global as typeof globalThis & {
   signup(): Promise<string[]>;
 };
 
+//or use this instead of the above
+// declare global {
+//   var signin: () => Promise<string[]>;
+// }
+
 globalWithSignIn.signup = async () => {
   const email = "test@test.com";
   const password = "password";
