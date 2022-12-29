@@ -18,9 +18,11 @@ spec:
         app: tickets
     spec:
       containers:
-        - name: tickets
+        - name:  tickets
           image: gcr.io/ticketing-dev-371321/tickets
           env:
+            - name: MONGO_URI
+              value: 'mongodb://tickets-mongo-srv:27017/tickets'
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
@@ -40,6 +42,6 @@ spec:
    # name can be anything
     - name: tickets
       protocol: TCP
-         # app listening on
+         # app listening on 3000
       port: 3000
       targetPort: 3000   
